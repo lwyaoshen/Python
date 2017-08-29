@@ -23,12 +23,12 @@ record_l = [
 {'_id':5,'name': 'zhangjian','age': 22,'high': 179},
 {'_id':6,'name': 'zwj','age': 19,'high': 166},
 {'_id':100,'name': 'zwj','age': 19,'list':[2,3,5]},
-{'_id':101,'name': 'zwj','age': 19,'list':[1,2,3,4,5,6,7]},
+{'_id':101,'name': 'zwj','age': 19,'list':[{'name':'ys','age':12},{'name':'ys1','age':14}]},
 ]
 try:
     for record in record_l:
-        #collection_set01.save(record)
-        pass
+        collection_set01.save(record)
+        #pass
 except pymongo.errors.DuplicateKeyError:
     print('record exists')
 except Exception as e:
@@ -38,6 +38,7 @@ except Exception as e:
 remove()
 delete_one(self, filter, collation=None)
 delete_many(self, filter, collation=None)
+'''
 '''
 newinsert1 = {'_id':7,'comment':'test delete'}
 newinsert2 = {'_id':8,'comment':'test delete'}
@@ -58,6 +59,8 @@ remove_after = collection_set01.find()
 print('delete after')
 for obj in remove_after:
     print(obj)
+'''
+
 
 '''
 
