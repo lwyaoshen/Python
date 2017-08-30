@@ -14,6 +14,15 @@ import re
 
 from mzitu_scrapy.settings import IMAGES_STORE
 
+headers = {
+    'Accept':'image/webp,image/apng,image/*,*/*;q=0.8',
+    'Accept-Encoding':'gzip, deflate',
+    'Accept-Language':'zh-CN,zh;q=0.8',
+    'Connection':'keep-alive',
+    'Host':'i.meizitu.net',
+    'Referer':'http://www.mzitu.com/101443/2',
+    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36'
+}
 
 class MzituScrapyPipeline(ImagesPipeline):
 
@@ -34,10 +43,10 @@ class MzituScrapyPipeline(ImagesPipeline):
 
     def get_media_requests(self, item, info):
         dic = IMAGES_STORE + item['name']
-        os.mkdir(dic)
+        #os.mkdir(dic)
         for img_url in item['image_urls']:
-            #yield Request(img_url, meta={'item': item})
-            urllib.request.urlretrieve(img_url, dic + '//' + img_url.split('/')[-1] + '.jpg');
+            yield Request(img_url, meta={'item': item},headers = headers)
+            #urllib.request.urlretrieve(img_url, dic + '//' + img_url.split('/')[-1] + '.jpg');
 
 
 
